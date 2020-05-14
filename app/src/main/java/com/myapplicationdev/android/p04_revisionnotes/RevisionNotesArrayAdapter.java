@@ -15,6 +15,7 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 	ArrayList<Note> notes;
 	int resource;
 	ImageView iv1, iv2, iv3, iv4, iv5;
+	TextView tvContent;
 
 	public RevisionNotesArrayAdapter(Context context, int resource, ArrayList<Note> notes) {
 		super(context, resource, notes);
@@ -31,11 +32,12 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 		View rowView = inflater.inflate(resource, parent, false);
 
 		//Match the UI components with Java variables
+		tvContent = (TextView) rowView.findViewById(R.id.textViewNote);
 
 		Note note = notes.get(position);
 
 		//Check if the property for starts >= 5, if so, "light" up the stars
-		if (/*stars >= 5*/) {
+		if (resource >= 5) {
 			iv5.setImageResource(android.R.drawable.btn_star_big_on);
 			iv4.setImageResource(android.R.drawable.btn_star_big_on);
 			iv3.setImageResource(android.R.drawable.btn_star_big_on);
