@@ -1,5 +1,7 @@
 package com.myapplicationdev.android.p04_revisionnotes;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,13 +47,13 @@ public class MainActivity extends AppCompatActivity {
         rb5 = findViewById(R.id.radio5);
 
         DBHelper db = new DBHelper(MainActivity.this);
-        notes = db.getNoteContent();
+        notes = db.getAllNotes();
         db.close();
 
         aa = new RevisionNotesArrayAdapter(this, R.layout.row, notes);
         lv.setAdapter(aa);
 
-        btnInsertNote.setOnClickListener(new View.OnClickListener(){
+        btnInsertNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Create the DBHelper object, passing in the
@@ -63,42 +65,22 @@ public class MainActivity extends AppCompatActivity {
                 db.insertNote("#Revision notes 2", 4);
                 db.insertNote("#Revision notes 3", 5);
 
-                Toast.makeText(MainActivity.this,"Inserted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Inserted", Toast.LENGTH_SHORT).show();
 
                 db.close();
             }
         });
 
-        btnShowList.setOnClickListener(new View.OnClickListener(){
+        btnShowList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Create the DBHelper object, passing in the
                 // activity's Context
-                DBHelper db = new DBHelper(MainActivity.this);
-
-                // Insert a task
-                ArrayList<String> data = db.getAllNotes();
-                ArrayList<Note> newtasks = db.getNoteContent();
-                notes = db.getNoteContent();
+                Intent i = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(i);
 
 
-                db.close();
-
-                String txt = "";
-                for (int i = 0; i < data.size(); i++) {
-                    Log.d("Database Content", i +". "+data.get(i));
-                    txt += i + ". " + data.get(i) + "\n";
-                }
-                tvNote.setText(txt);
-
-                notes.clear();
-                for (int i=0;i<newtasks.size();i++){
-                    notes.add(newtasks.get(i));
-                }
-                aa.notifyDataSetChanged();
             }
         });
+    }}
 
-
-    }
-}

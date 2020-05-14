@@ -2,12 +2,12 @@ package com.myapplicationdev.android.p04_revisionnotes;
 
 public class Note {
     private int id;
-    private int stars;
+    private String stars;
     private String noteContent;
 	//What's here?
 
 
-    public Note(int id, int stars, String noteContent) {
+    public Note(int id, String stars, String noteContent) {
         this.id = id;
         this.stars = stars;
         this.noteContent = noteContent;
@@ -21,11 +21,11 @@ public class Note {
         this.id = id;
     }
 
-    public int getStars() {
+    public String getStars() {
         return stars;
     }
 
-    public void setStars(int stars) {
+    public void setStars(String stars) {
         this.stars = stars;
     }
 

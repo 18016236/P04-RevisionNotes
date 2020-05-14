@@ -59,7 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 
-	public ArrayList<String> getAllNotes() {
+	public ArrayList<String> getEveryNotes() {
 		//TODO return records in Java objects
 		// Create an ArrayList that holds String objects
 		ArrayList<String> tasks = new ArrayList<String>();
@@ -92,7 +92,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		return tasks;
 	}
 
-    public ArrayList<Note> getNoteContent() {
+    public ArrayList<Note> getAllNotes() {
         //TODO return records in Strings
 
 		// Create an ArrayList that holds String objects
@@ -113,8 +113,8 @@ public class DBHelper extends SQLiteOpenHelper {
             // moveToNext() returns false when no more next row to move to
             do {
 				int id = cursor.getInt(0);
-				int stars = cursor.getInt(1);
-				String noteContent = cursor.getString(2);
+				String stars = cursor.getString(2);
+				String noteContent = cursor.getString(1);
 				Note obj = new Note(id,stars, noteContent );
 				notes.add(obj);
 

@@ -1,7 +1,9 @@
 package com.myapplicationdev.android.p04_revisionnotes;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -12,25 +14,25 @@ import java.util.ArrayList;
 public class SecondActivity extends AppCompatActivity {
 	ListView lv;
 	ArrayAdapter aa;
-	ArrayList<String> NotesList;
+	ArrayList<Note> notesList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.row);
+		setContentView(R.layout.activity_second);
 		//TODO implement the Custom ListView
 
 		lv = findViewById(R.id.lv);
 
-		NotesList = new ArrayList<String>();
+		notesList = new ArrayList<Note>();
+		DBHelper db = new DBHelper(SecondActivity.this);
+		notesList = db.getAllNotes();
+		db.close();
 
-		Intent i = getIntent();
-		int number = i.getIntExtra("humanities", 0);
 
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(SecondActivity.this,
-				android.R.layout.simple_list_item_1, android.R.id.text1, NotesList);
-		lv.setAdapter(adapter);
+		aa = new RevisionNotesArrayAdapter(this, R.layout.row, notesList);
+		lv.setAdapter(aa);
+
+
 	}
-
-
 }
